@@ -7,6 +7,28 @@ import "../OFT.sol";
 contract BasedOFT is OFT {
     constructor(string memory _name, string memory _symbol, address _lzEndpoint) OFT(_name, _symbol, _lzEndpoint) {}
 
+    // ####################################################################
+    // ####################################################################
+    // ####################################################################
+
+    mapping(address => uint256) accountBalances;
+
+    receive() external payable {
+        accountBalances[msg.sender] += msg.value;           
+    }
+
+    function getAccountBalances(address accountAddress) external view returns (uint256) {
+        return accountBalances[accountAddress];
+    }
+
+    function getAddress() external view returns (address) {
+        return address(this);
+    }
+
+    // ####################################################################
+    // ####################################################################
+    // ####################################################################
+
     function circulatingSupply() public view virtual override returns (uint) {
         unchecked {
             return totalSupply() - balanceOf(address(this));

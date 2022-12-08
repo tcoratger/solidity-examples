@@ -6,6 +6,8 @@ import "../../lzApp/NonblockingLzApp.sol";
 import "./IOFTCore.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
+import "hardhat/console.sol";
+
 abstract contract OFTCore is NonblockingLzApp, ERC165, IOFTCore {
     using BytesLib for bytes;
 
@@ -54,6 +56,9 @@ abstract contract OFTCore is NonblockingLzApp, ERC165, IOFTCore {
         _checkAdapterParams(_dstChainId, PT_SEND, _adapterParams, NO_EXTRA_GAS);
 
         uint amount = _debitFrom(_from, _dstChainId, _toAddress, _amount);
+
+        console.log("_dstChainId", _dstChainId);
+        console.log("amlount: ", amount);
 
         bytes memory lzPayload = abi.encode(PT_SEND, _toAddress, amount);
         _lzSend(_dstChainId, lzPayload, _refundAddress, _zroPaymentAddress, _adapterParams, msg.value);

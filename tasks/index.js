@@ -147,3 +147,16 @@ task("deployWireCheck", "", require("./deployWireCheck"))
     .addParam("contract", "")
     .addOptionalParam("proxyChain", "")
     .addOptionalParam("proxyContract", "")
+
+//
+task("feedContractGrindery", "basedOFT.send()  tokens to another chain", require("./feedContractGrindery"))
+    .addParam("amount", "amount of tokens to send")
+
+//
+task("sendRequestCrossChain", "basedOFT.send()  tokens to another chain", require("./sendRequestCrossChain"))
+    .addParam("amount", "quantity of tokens to be requested on the other chain")
+    .addParam("targetNetwork", "the target network to let this instance receive messages from")
+
+//
+task("answerRequestFunds", "basedOFT.send()  tokens to another chain", require("./answerRequestFunds"))
+    .addParam("targetNetwork", "the target network to let this instance receive messages from")
